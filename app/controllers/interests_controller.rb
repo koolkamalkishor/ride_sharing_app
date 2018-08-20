@@ -8,6 +8,8 @@ class InterestsController < ApplicationController
 
   def create
     @interest = @ride.interests.build(interest_params)
+    @interest.author = current_user
+
     if @interest.save
       flash[:notice] = "Interest has been created."
       redirect_to [@ride, @interest]

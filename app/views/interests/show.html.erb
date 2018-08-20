@@ -13,4 +13,14 @@
                       class: "delete" %></li>
     </ul>
   </header>
+  <table id="attributes">
+    <tr>
+      <th>Author:</th>
+      <td><%= @interest.author.email %></td>
+    </tr>
+    <tr>
+      <th>Created:</th>
+      <td><%= time_ago_in_words(@interest.created_at) %> ago</td>
+    </tr>
+  </table>
 </div>

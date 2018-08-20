@@ -2,12 +2,14 @@ require "rails_helper"
 RSpec.feature "Users can view interests" do
 
   before do
+    author = FactoryGirl.create(:user)
+
     ride = FactoryGirl.create(:ride, destination: "Nairobi", checkout: "18:00", passengers: 4)
     FactoryGirl.create(:interest, ride: ride,
-                       name: "Interested")
+                       author: author, name: "Interested")
     ride2 = FactoryGirl.create(:ride, destination: "Mombasa", checkout: "18:00", passengers: 2)
     FactoryGirl.create(:interest, ride: ride2,
-                       name: "Not Interested")
+                       author: author, name: "Not Interested")
     visit "/"
   end
 
