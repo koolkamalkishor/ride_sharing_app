@@ -40,6 +40,14 @@ class RidesController < ApplicationController
     end
   end
 
+  def destroy
+    @ride = Ride.find(params[:id])
+    @ride.destroy
+
+    flash[:notice] = "Ride has been deleted."
+    redirect_to rides_path
+  end
+
   private
 
   def ride_params
