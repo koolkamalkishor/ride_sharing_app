@@ -33,6 +33,12 @@ class InterestsController < ApplicationController
     end
   end
 
+  def destroy
+    @interest.destroy
+    flash[:notice] = "Interest has been deleted."
+    redirect_to @ride
+  end
+
 
   private
 
