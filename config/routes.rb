@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   root "rides#index"
 
-  resources :rides
+  resources :rides do
+    resources :interests
+  end
 end
