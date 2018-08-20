@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "Users can edit existing rides" do
   before do
-    FactoryGirl.create(:ride, destination: "Nairobi", checkout: Time.now, passengers: 4)
+    FactoryGirl.create(:ride, destination: "Nairobi", checkout: "18:00", passengers: 4)
 
     visit "/"
     click_link "Nairobi"

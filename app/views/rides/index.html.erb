@@ -1,5 +1,10 @@
+<header>
 <h1>Rides</h1>
-<%= link_to "New Ride", new_ride_path %>
+<ul class="actions">
+  <li><%= link_to "New Ride", new_ride_path, class: "new" %></li>
+</ul>
+</header>
+
 
 <div id="rides">
   <% @rides.each do |ride| %>

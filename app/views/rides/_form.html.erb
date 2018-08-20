@@ -1,26 +1,7 @@
-<%= form_for(ride) do |f| %>
-    <% if ride.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(ride.errors.count, "error") %>
-            prohibited this ride from being saved:</h2>
-          <ul>
-            <% ride.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
-    <p>
-      <%= f.label :passengers %><br>
-      <%= f.text_field :passengers %>
-    </p>
-    <p>
-      <%= f.label :checkout %><br>
-      <%= f.text_field :checkout %>
-    </p>
-    <p>
-      <%= f.label :destination %><br>
-      <%= f.text_field :destination %>
-    </p>
-    <%= f.submit %>
+<%= simple_form_for(ride) do |f| %>
+      <%= f.input :passengers %>
+      <%= f.input :checkout %>
+      <%= f.input :destination %>
+
+    <%= f.button :submit, class: "btn-primary" %>
 <% end %>

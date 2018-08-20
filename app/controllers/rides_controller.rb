@@ -1,4 +1,6 @@
 class RidesController < ApplicationController
+
+  before_action :set_ride, only: [:show, :edit, :update, :destroy]
   def index
     @rides = Ride.all
   end
@@ -21,16 +23,12 @@ class RidesController < ApplicationController
   end
 
   def show
-    @ride = Ride.find(params[:id])
   end
 
   def edit
-    @ride = Ride.find(params[:id])
   end
 
   def update
-    @ride = Ride.find(params[:id])
-
     if @ride.update(ride_params)
       flash[:notice] = "Ride has been updated."
       redirect_to @ride
@@ -41,7 +39,6 @@ class RidesController < ApplicationController
   end
 
   def destroy
-    @ride = Ride.find(params[:id])
     @ride.destroy
 
     flash[:notice] = "Ride has been deleted."
@@ -52,5 +49,12 @@ class RidesController < ApplicationController
 
   def ride_params
     params.require(:ride).permit(:destination, :checkout, :passengers)
+  end
+
+  def set_ride
+    @ride = Ride.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    flash[:alert] = "the ride you were looking for could not be found."
+    redirect_to rides_path
   end
 end

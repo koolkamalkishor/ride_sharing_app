@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 2018_08_20_075258) do
 
   create_table "rides", force: :cascade do |t|
-    t.time "checkout"
+    t.string "checkout"
     t.integer "passengers"
     t.string "destination"
     t.datetime "created_at", null: false
