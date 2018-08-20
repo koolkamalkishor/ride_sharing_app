@@ -4,5 +4,10 @@
   </header>
   <header>
     <h2><%= @interest.name %></h2>
+
+    <ul class="actions">
+      <li><%= link_to "Edit Interest", [:edit, @ride, @interest],
+                      class: "edit" %></li>
+    </ul>
   </header>
 </div>

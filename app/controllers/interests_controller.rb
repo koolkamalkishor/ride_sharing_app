@@ -20,6 +20,20 @@ class InterestsController < ApplicationController
   def show
   end
 
+  def edit
+  end
+
+  def update
+    if @interest.update(interest_params)
+      flash[:notice] = "Interest has been updated."
+      redirect_to [@ride, @interest]
+    else
+      flash.now[:alert] = "Interest has not been updated."
+      render "edit"
+    end
+  end
+
+
   private
 
   def interest_params
