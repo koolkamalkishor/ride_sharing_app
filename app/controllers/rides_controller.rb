@@ -24,6 +24,22 @@ class RidesController < ApplicationController
     @ride = Ride.find(params[:id])
   end
 
+  def edit
+    @ride = Ride.find(params[:id])
+  end
+
+  def update
+    @ride = Ride.find(params[:id])
+
+    if @ride.update(ride_params)
+      flash[:notice] = "Ride has been updated."
+      redirect_to @ride
+    else
+      flash.now[:alert] = "Ride has not been updated."
+      render "edit"
+    end
+  end
+
   private
 
   def ride_params
