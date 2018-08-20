@@ -17,3 +17,20 @@
 
 <h1> A ride for <%= @ride.passengers %> People</h1>
 <p> Leaving at <%= @ride.checkout %> to <%= @ride.destination %></p>
+
+<header>
+  <h2>Interest</h2>
+  <ul class="actions">
+    <li><%= link_to "New Interest", new_ride_interest_path(@ride),
+                    class: "new" %></li>
+  </ul>
+</header>
+
+<ul id="interests">
+  <% @ride.interests.each do |interest| %>
+      <li>
+        #<%= interest.id %> -
+        <%= link_to interest.name, [@ride, interest] %>
+      </li>
+  <% end %>
+</ul>
