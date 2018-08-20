@@ -1,0 +1,16 @@
+<h1>New Ride</h1>
+<%= form_for(@ride) do |f| %>
+    <p>
+      <%= f.label :passengers %><br>
+      <%= f.text_field :passengers %>
+    </p>
+    <p>
+      <%= f.label :checkout %><br>
+      <%= f.text_field :checkout %>
+    </p>
+    <p>
+      <%= f.label :destination %><br>
+      <%= f.text_field :destination %>
+    </p>
+    <%= f.submit %>
+<% end %>
