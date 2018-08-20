@@ -1,0 +1,19 @@
+<header>
+  <h1><%= @ride.destination %></h1>
+
+  <ul class="actions">
+    <li><%= link_to "Edit Ride",
+                    edit_ride_path(@ride), class: "edit" %></li>
+    <li> <%= link_to "Delete Ride",
+                     ride_path(@ride),
+                     method: :delete,
+                     data: {confirm: "Are you sure you want to delete this ride?" },
+                     class: "delete" %></li>
+  </ul>
+</header>
+
+
+
+
+<h1> A ride for <%= @ride.passengers %> People</h1>
+<p> Leaving at <%= @ride.checkout %> to <%= @ride.destination %></p>

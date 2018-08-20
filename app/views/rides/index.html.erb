@@ -1,0 +1,14 @@
+<header>
+<h1>Rides</h1>
+<ul class="actions">
+  <li><%= link_to "New Ride", new_ride_path, class: "new" %></li>
+</ul>
+</header>
+
+
+<div id="rides">
+  <% @rides.each do |ride| %>
+    <h2><%= link_to ride.destination, ride %></h2>
+      <p> Requiring <%= ride.passengers %> and leaving at <%= ride.checkout %></p>
+  <% end %>
+</div>
