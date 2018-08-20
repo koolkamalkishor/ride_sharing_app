@@ -13,6 +13,8 @@ class RidesController < ApplicationController
       flash[:notice] = "Ride has been created.";
       redirect_to @ride
     else
+      flash.now[:alert] = "Ride has not been created"
+      render "new"
 
     end
   end
