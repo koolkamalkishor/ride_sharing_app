@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     root 'application#index'
 
     resources :rides, only: [:new, :create, :destroy]
+    resources :users
   end
   devise_for :users
 
