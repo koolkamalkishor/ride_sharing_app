@@ -1,6 +1,9 @@
 require "rails_helper"
 
 RSpec.feature "Users can delete rides" do
+  before do
+    login_as(FactoryGirl.create(:user, :admin))
+  end
   scenario "successfully" do
     FactoryGirl.create(:ride, destination: "Nairobi", checkout: "18:00", passengers: 4)
 

@@ -1,8 +1,10 @@
 <header>
 <h1>Rides</h1>
-<ul class="actions">
-  <li><%= link_to "New Ride", new_ride_path, class: "new" %></li>
-</ul>
+  <% admins_only do %>
+    <ul class="actions">
+      <li><%= link_to "New Ride", new_admin_ride_path, class: "new" %></li>
+    </ul>
+  <% end %>
 </header>
 
 

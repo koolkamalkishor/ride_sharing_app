@@ -1,0 +1,7 @@
+<%= simple_form_for([:admin, ride]) do |f| %>
+      <%= f.input :passengers %>
+      <%= f.input :checkout %>
+      <%= f.input :destination %>
+
+    <%= f.button :submit, class: "btn-primary" %>
+<% end %>
