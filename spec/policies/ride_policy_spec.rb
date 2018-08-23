@@ -31,68 +31,47 @@ describe RidePolicy do
     end
   end
 
-  permissions :update? do
-    let(:user) { FactoryGirl.create :user }
+  context "permissions" do
+    subject { RidePolicy.new(user, ride) }
+
+    let(:user) { FactoryGirl.create(:user) }
     let(:ride) { FactoryGirl.create(:ride, destination: "Nairobi", checkout: "18:00", passengers: 4) }
 
-    it "blocks anonymous users" do
-      expect(subject).not_to permit(nil, ride)
+    context "for anonymous users" do
+      let(:user) { nil }
+      it { should_not permit_action :show }
+      it { should_not permit_action :update }
     end
 
-    it "doesn't allow viewers of the project" do
-      assign_role!(user, :viewer, ride)
-      expect(subject).not_to permit(user, ride)
+    context "for viewers of the ride" do
+      before { assign_role!(user, :viewer, ride) }
+      it { should permit_action :show }
+      it { should_not permit_action :update }
     end
 
-  it "doesn't allows editors of the project" do
-    assign_role!(user, :editor, ride)
-    expect(subject).not_to permit(user, ride)
-  end
-
-  it "allows managers of the project" do
-    assign_role!(user, :driver, ride)
-    expect(subject).to permit(user, ride)
-  end
-
-  it "allows administrators" do
-    admin = FactoryGirl.create :user, :admin
-    expect(subject).to permit(admin, ride)
-  end
-
-  it "doesn't allow users assigned to other projects" do
-    other_ride = FactoryGirl.create(:ride, destination: "Nairobi", checkout: "18:00", passengers: 4)
-    assign_role!(user, :driver, other_ride)
-    expect(subject).not_to permit(user, ride)
-  end
-end
-
-  permissions :show? do
-    let(:user) { FactoryGirl.create :user }
-    let(:ride) {  FactoryGirl.create(:ride, destination: "Nairobi", checkout: "18:00", passengers: 4) }
-
-    it "blocks anonymous users" do
-      expect(subject).not_to permit(nil, ride)
+    context "for editors of the ride" do
+      before { assign_role!(user, :editor, ride) }
+      it { should permit_action :show }
+      it { should_not permit_action :update }
     end
 
-    it "allows viewers of the ride" do
-      assign_role!(user, :viewer, ride)
-      expect(subject).to permit(user, ride)
+    context "for drivers of the ride" do
+      before { assign_role!(user, :driver, ride) }
+      it { should permit_action :show }
+      it { should permit_action :update }
     end
 
-    it "allows drivers of the ride" do
-      assign_role!(user, :driver, ride)
-      expect(subject).to permit(user, ride)
+    context "for drivers of other rides" do
+      before do
+        assign_role!(user, :driver, FactoryGirl.create(:ride, destination: "Kisumu", checkout: "18:00", passengers: 4))
+      end
+      it { should_not permit_action :show }
+      it { should_not permit_action :update }
     end
-
-    it "allows administrators" do
-      admin = FactoryGirl.create :user, :admin
-      expect(subject).to permit(admin, ride)
-    end
-    it "doesn't allow users assigned to other ride" do
-      other_ride =  FactoryGirl.create(:ride, destination: "Eldoret", checkout: "18:00", passengers: 4)
-      assign_role!(user, :driver, other_ride)
-      expect(subject).not_to permit(user, ride)
+    context "for administrators" do
+      let(:user) { FactoryGirl.create :user, :admin }
+      it { should permit_action :show }
+      it { should permit_action :update }
     end
   end
-
 end

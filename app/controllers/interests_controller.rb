@@ -20,6 +20,7 @@ class InterestsController < ApplicationController
   end
 
   def show
+    authorize @interest, :show?
   end
 
   def edit
