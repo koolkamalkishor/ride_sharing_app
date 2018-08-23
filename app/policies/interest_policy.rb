@@ -6,6 +6,11 @@ class InterestPolicy < ApplicationPolicy
   end
 
   def show?
-    user.try(:admin?) || record.ride.roles.exists?(user_id: user)
+    user.try(:admin?) || record.ride.has_member?(user)
+  end
+
+  def create?
+    user.try(:admin?) || record.ride.has_driver?(user) ||
+        record.ride.has_editor?(user)
   end
 end

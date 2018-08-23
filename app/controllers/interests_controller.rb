@@ -3,12 +3,14 @@ class InterestsController < ApplicationController
   before_action :set_interest, only: [:show, :edit, :update, :destroy]
   def new
     @interest = @ride.interests.build
+    authorize @interest, :create?
   end
 
 
   def create
     @interest = @ride.interests.build(interest_params)
     @interest.author = current_user
+    authorize @interest, :create?
 
     if @interest.save
       flash[:notice] = "Interest has been created."

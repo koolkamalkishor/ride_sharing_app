@@ -7,7 +7,7 @@ RSpec.feature "Users can edit existing interests" do
   before do
     assign_role!(author, :viewer, ride)
     login_as(author)
-    
+
     visit ride_interest_path(ride, interest)
     click_link "Edit Interest"
   end
