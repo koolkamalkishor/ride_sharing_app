@@ -4,6 +4,7 @@ RSpec.feature "Users can only see the appropriate links" do
   let(:ride) { FactoryGirl.create(:ride, destination: "Nairobi", checkout: "18:00", passengers: 4)}
   let(:user) { FactoryGirl.create(:user) }
   let(:admin) { FactoryGirl.create(:user, :admin) }
+  let(:interest) { FactoryGirl.create(:interest, ride: ride, author: user) }
 
   context "non admin users" do
     before do
@@ -25,6 +26,11 @@ RSpec.feature "Users can only see the appropriate links" do
       expect(page).not_to have_link "Edit Ride"
     end
 
+    scenario "cannot see the Edit Interest link" do
+      visit ride_interest_path(ride, interest)
+      expect(page).not_to have_link "Edit Interest"
+    end
+
     scenario "cannot see the Delete Ride link" do
       visit ride_path(ride)
       expect(page).not_to have_link "Delete Ride"
@@ -42,6 +48,11 @@ RSpec.feature "Users can only see the appropriate links" do
     scenario "can see the New Interest link" do
       visit ride_path(ride)
       expect(page).to have_link "New Interest"
+    end
+
+    scenario "can see the Edit Interest link" do
+      visit ride_interest_path(ride, interest)
+      expect(page).to have_link "Edit Interest"
     end
 
     scenario "can see the Edit Ride link" do

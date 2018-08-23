@@ -26,9 +26,12 @@ class InterestsController < ApplicationController
   end
 
   def edit
+    authorize @interest, :update?
   end
 
   def update
+    authorize @interest, :update?
+
     if @interest.update(interest_params)
       flash[:notice] = "Interest has been updated."
       redirect_to [@ride, @interest]

@@ -12,18 +12,21 @@ RSpec.describe InterestPolicy do
       before { assign_role!(user, :viewer, ride) }
       it { should permit_action :show }
       it { should_not permit_action :create }
+      it { should_not permit_action :update }
     end
 
     context "for editors of the ride" do
       before { assign_role!(user, :editor, ride) }
       it { should permit_action :show }
       it { should permit_action :create }
+
     end
 
     context "for drivers of the ride" do
       before { assign_role!(user, :driver, ride) }
     it { should permit_action :show }
       it { should permit_action :create }
+      it { should permit_action :update }
     end
 
   context "for drivers of other rides" do
@@ -32,12 +35,14 @@ RSpec.describe InterestPolicy do
     end
     it { should_not permit_action :show }
     it { should_not permit_action :create }
+    it { should_not permit_action :update }
   end
 
   context "for administrators" do
     let(:user) { FactoryGirl.create :user, :admin }
     it { should permit_action :show }
     it { should permit_action :create }
+    it { should permit_action :update }
   end
 end
 end
