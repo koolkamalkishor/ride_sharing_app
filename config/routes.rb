@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   root "rides#index"
 
-  resources :rides, only: [:index, :show, :edit, :update] do
+  resources :rides do
     resources :interests
   end
 end
