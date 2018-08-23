@@ -18,4 +18,8 @@ class InterestPolicy < ApplicationPolicy
     user.try(:admin?) || record.ride.has_driver?(user) ||
         (record.ride.has_editor?(user) && record.author == user)
   end
+
+  def destroy?
+    user.try(:admin?) || record.ride.has_driver?(user)
+  end
 end

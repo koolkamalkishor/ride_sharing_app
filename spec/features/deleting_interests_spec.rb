@@ -6,7 +6,7 @@ RSpec.feature "Users can delete interests" do
 
   before do
     login_as(author)
-    assign_role!(author, :viewer, ride)
+    assign_role!(author, :driver, ride)
     visit ride_interest_path(ride, interest)
   end
 
