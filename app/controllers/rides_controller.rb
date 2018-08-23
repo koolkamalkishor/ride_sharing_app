@@ -2,7 +2,7 @@ class RidesController < ApplicationController
 
   before_action :set_ride, only: [:show, :edit, :update,]
   def index
-    @rides = Ride.all
+    @rides = policy_scope(Ride)
   end
 
   def new
@@ -27,9 +27,12 @@ class RidesController < ApplicationController
   end
 
   def edit
+    authorize @ride, :update?
   end
 
   def update
+    authorize @ride, :update?
+
     if @ride.update(ride_params)
       flash[:notice] = "Ride has been updated."
       redirect_to @ride

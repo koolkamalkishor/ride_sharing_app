@@ -6,7 +6,7 @@ RSpec.feature "Users can edit existing rides" do
 
   before do
     login_as(user)
-    assign_role!(user, :viewer, ride)
+    assign_role!(user, :driver, ride)
 
     visit "/"
     click_link "Nairobi"

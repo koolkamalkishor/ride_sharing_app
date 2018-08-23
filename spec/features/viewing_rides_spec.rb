@@ -8,6 +8,7 @@ RSpec.feature "Users can view rides" do
     login_as(user)
     assign_role!(user, :viewer, ride)
   end
+
   scenario "with the ride details" do
     visit "/"
     click_link "Nairobi"

@@ -5,6 +5,7 @@ class Admin::ApplicationController < ApplicationController
 
 
   private
+
   def authorize_admin!
     authenticate_user!
 
