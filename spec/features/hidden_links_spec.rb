@@ -15,6 +15,11 @@ RSpec.feature "Users can only see the appropriate links" do
       expect(page).to have_link "New Ride"
     end
 
+    scenario "cannot see the New Interest link" do
+      visit ride_path(ride)
+      expect(page).not_to have_link "New Interest"
+    end
+
     scenario "cannot see the Edit Ride link" do
       visit ride_path(ride)
       expect(page).not_to have_link "Edit Ride"
@@ -32,6 +37,11 @@ RSpec.feature "Users can only see the appropriate links" do
     scenario "can see the New Ride link" do
       visit "/"
       expect(page).to have_link "New Ride"
+    end
+
+    scenario "can see the New Interest link" do
+      visit ride_path(ride)
+      expect(page).to have_link "New Interest"
     end
 
     scenario "can see the Edit Ride link" do
