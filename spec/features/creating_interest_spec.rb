@@ -5,6 +5,7 @@ RSpec.feature " users can respond to ride offers" do
   before do
     login_as(user)
     ride = FactoryGirl.create(:ride, destination: "Nairobi", checkout: "18:00", passengers: 4)
+    assign_role!(user, :viewer, ride)
 
     visit ride_path(ride)
     click_link "New Interest"
