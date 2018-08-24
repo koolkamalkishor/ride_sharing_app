@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :roles
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -20,5 +21,9 @@ class User < ApplicationRecord
 
   def inactive_message
     archived_at.nil? ? super : :archived
+  end
+
+  def role_on(ride)
+    roles.find_by(ride_id: ride).try(:destination)
   end
 end

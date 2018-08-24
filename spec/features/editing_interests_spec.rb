@@ -3,7 +3,11 @@ RSpec.feature "Users can edit existing interests" do
   let(:author) { FactoryGirl.create(:user) }
   let(:ride) { FactoryGirl.create(:ride, destination: "Nairobi", checkout: "18:00", passengers: 4) }
   let(:interest) { FactoryGirl.create(:interest, ride: ride, author: author) }
+
   before do
+    assign_role!(author, :editor, ride)
+    login_as(author)
+
     visit ride_interest_path(ride, interest)
     click_link "Edit Interest"
   end

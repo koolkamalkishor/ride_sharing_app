@@ -1,8 +1,12 @@
 require 'rails_helper'
 
 RSpec.feature "Users can edit existing rides" do
+  let(:user) { FactoryGirl.create(:user) }
+  let(:ride) { FactoryGirl.create(:ride, destination: "Nairobi", checkout: "18:00", passengers: 4)}
+
   before do
-    FactoryGirl.create(:ride, destination: "Nairobi", checkout: "18:00", passengers: 4)
+    login_as(user)
+    assign_role!(user, :driver, ride)
 
     visit "/"
     click_link "Nairobi"

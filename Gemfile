@@ -28,6 +28,10 @@ gem "font-awesome-rails"
 gem "simple_form"
 
 gem "devise"
+
+gem "pundit", "~> 0.3.0"
+
+gem 'simplecov'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password

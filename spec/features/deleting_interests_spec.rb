@@ -5,8 +5,11 @@ RSpec.feature "Users can delete interests" do
   let(:interest) { FactoryGirl.create(:interest, ride: ride, author: author) }
 
   before do
+    login_as(author)
+    assign_role!(author, :driver, ride)
     visit ride_interest_path(ride, interest)
   end
+
   scenario "successfully" do
     click_link "Delete Interest"
     expect(page).to have_content "Interest has been deleted."

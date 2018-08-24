@@ -2,8 +2,10 @@
   <h1><%= @ride.destination %></h1>
 
   <ul class="actions">
-    <li><%= link_to "Edit Ride",
-                    edit_ride_path(@ride), class: "edit" %></li>
+    <% if policy(@ride).update? %>
+      <li><%= link_to "Edit Ride",
+                      edit_ride_path(@ride), class: "edit" %></li>
+    <% end %>
     <% admins_only do %>
       <li> <%= link_to "Delete Ride",
                        admin_ride_path(@ride),
@@ -23,8 +25,10 @@
 <header>
   <h2>Interest</h2>
   <ul class="actions">
-    <li><%= link_to "New Interest", new_ride_interest_path(@ride),
-                    class: "new" %></li>
+    <% if policy(Interest.new(ride: @ride)).create? %>
+      <li><%= link_to "New Interest", new_ride_interest_path(@ride),
+                      class: "new" %></li>
+    <% end %>
   </ul>
 </header>
 

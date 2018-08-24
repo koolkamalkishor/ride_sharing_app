@@ -2,5 +2,24 @@
     <%= f.input :email %>
     <%= f.input :password %>
     <%= f.input :admin, label: "Is an admin?" %>
+
+    <header>
+      <h2>Roles</h2>
+    </header>
+
+    <table class="roles">
+      <% rides.each do |ride| %>
+          <tr>
+            <th><%= label_tag dom_id(ride), ride.destination %></th>
+            <td>
+              <%= select_tag dom_id(ride), options_for_select(
+                  roles, user.role_on(ride)), name: "roles[#{ride.id}]",
+                             include_blank: true %>
+            </td>
+          </tr>
+      <% end %>
+    </table>
+
+
     <%= f.button :submit, class: "btn btn-primary" %>
 <% end %>

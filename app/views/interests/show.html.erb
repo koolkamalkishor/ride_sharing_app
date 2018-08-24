@@ -6,11 +6,15 @@
     <h2><%= @interest.name %></h2>
 
     <ul class="actions">
+      <% if policy(@interest).update? %>
       <li><%= link_to "Edit Interest", [:edit, @ride, @interest],
                       class: "edit" %></li>
-      <li><%= link_to "Delete Interest", [@ride, @interest], method: :delete,
-                      data: { confirm: "Are you sure you want to delete this interest?"},
-                      class: "delete" %></li>
+          <% end %>
+      <% if policy(@interest).destroy? %>
+        <li><%= link_to "Delete Interest", [@ride, @interest], method: :delete,
+                        data: { confirm: "Are you sure you want to delete this interest?"},
+                        class: "delete" %></li>
+          <% end %>
     </ul>
   </header>
   <table id="attributes">
