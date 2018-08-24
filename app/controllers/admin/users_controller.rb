@@ -1,6 +1,7 @@
 class Admin::UsersController < Admin::ApplicationController
 
   before_action :set_user, only: [:show, :edit, :update, :archive]
+  before_action :set_rides, only: [:new, :create, :edit, :update]
   def index
     @users = User.excluding_archived.order(:email)
   end
@@ -11,6 +12,7 @@ class Admin::UsersController < Admin::ApplicationController
 
   def create
     @user = User.new(user_params)
+    build_roles_for(@user)
     if @user.save
       flash[:notice] = "User has been created."
       redirect_to admin_users_path
@@ -30,12 +32,18 @@ class Admin::UsersController < Admin::ApplicationController
     if params[:user][:password].blank?
       params[:user].delete(:password)
     end
-    if @user.update(user_params)
-      flash[:notice] = "User has been updated."
-      redirect_to admin_users_path
-    else
-      flash.now[:alert] = "User has not been updated."
-      render "edit"
+
+    User.transaction do
+      @user.roles.clear
+      build_roles_for(@user)
+      if @user.update(user_params)
+        flash[:notice] = "User has been updated."
+        redirect_to admin_users_path
+      else
+        flash.now[:alert] = "User has not been updated."
+        render "edit"
+        raise ActiveRecord::Rollback
+      end
     end
   end
 
@@ -49,7 +57,20 @@ class Admin::UsersController < Admin::ApplicationController
     redirect_to admin_users_path
   end
 
+
   private
+  def set_rides
+    @ride = Ride.order(:destination)
+  end
+
+  def build_roles_for(user)
+    role_data = params.fetch(:roles, [])
+    role_data.each do |ride_id, role_name|
+      if role_name.present?
+        user.roles.build(ride_id: ride_id, role: role_name)
+      end
+    end
+  end
 
   def set_user
     @user = User.find(params[:id])
