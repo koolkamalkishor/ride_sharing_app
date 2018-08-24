@@ -32,7 +32,6 @@ class RidesController < ApplicationController
     end
   end
 
-
   def show
     authorize @ride, :show?
   end
