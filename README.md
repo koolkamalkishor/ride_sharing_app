@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ogomb/ride_sharing_app.svg?branch=master)](https://travis-ci.org/ogomb/ride_sharing_app)[![Coverage Status](https://coveralls.io/repos/github/ogomb/ride_sharing_app/badge.svg?branch=master)](https://coveralls.io/github/ogomb/ride_sharing_app?branch=master)
+
 # Ride Sharing App
 
 A RideSharing application that allows you and other Andelans to collaborate and carpool to work! 
