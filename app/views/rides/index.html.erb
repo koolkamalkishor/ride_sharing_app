@@ -5,10 +5,38 @@
     </ul>
 </header>
 
-<%  %>
-<div id="rides">
-  <% @rides.each do |ride| %>
-    <h2><%= link_to ride.destination, ride %></h2>
-      <p> Requiring <%= ride.passengers %> and leaving at <%= ride.checkout %></p>
-  <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <div id="rides">
+        <% @rides.each do |ride| %>
+          <h2><%= link_to ride.destination, ride %></h2>
+            <p> Requiring <%= ride.passengers %> and leaving at <%= ride.checkout %></p>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-sm-offset-6" >
+      <header>
+        <p>Available Rides</p>
+      </header>
+
+      <%= simple_form_for(:user) do |f| %>
+      <table class="roles">
+        <% @all_rides.each do |ride| %>
+            <tr>
+              <th><%= label_tag dom_id(ride), 'Ride to ' + ride.destination + ' leaving at ' + ride.checkout + ' want to be?' %></th>
+              <td>
+                <%= select_tag dom_id(ride), options_for_select(roles,
+                    @user.role_on(ride)), name: "roles[#{ride.id}]",
+                               include_blank: true %>
+              </td>
+            </tr>
+        <% end %>
+      </table>
+
+          <%= f.button :submit, 'Add Ride',class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
 </div>

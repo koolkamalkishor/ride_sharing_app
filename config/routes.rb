@@ -17,4 +17,6 @@ Rails.application.routes.draw do
   resources :rides do
     resources :interests
   end
+
+  post '/', :to => 'rides#add_ride'
 end

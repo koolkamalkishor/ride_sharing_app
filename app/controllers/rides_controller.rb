@@ -1,8 +1,10 @@
 class RidesController < ApplicationController
 
   before_action :set_ride, only: [:show, :edit, :update,]
+  before_action :set_rides, only: [:index]
   def index
     @rides = policy_scope(Ride)
+    @user = current_user
   end
 
   def new
@@ -42,7 +44,29 @@ class RidesController < ApplicationController
     end
   end
 
+  def add_ride
+    @user = current_user
+    User.transaction do
+      @user.roles.clear
+      role_data = params.fetch(:roles, [])
+      role_data.each do |ride_id, role_name|
+        if role_name.present?
+          @user.roles.build(ride_id: ride_id, role: role_name)
+        end
+      end
+      if !@user.save
+        flash.now[:alert] = "User has not been updated."
+        raise ActiveRecord::Rollback
+      end
+      redirect_to rides_path
+    end
+  end
+
   private
+
+  def set_rides
+    @all_rides = Ride.order(:destination)
+  end
 
   def ride_params
     params.require(:ride).permit(:destination, :checkout, :passengers)
