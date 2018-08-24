@@ -1,24 +1,64 @@
-# README
+# Ride Sharing App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A RideSharing application that allows you and other Andelans to collaborate and carpool to work! 
 
-Things you may want to cover:
+## Getting Started
 
-* Ruby version
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
 
-* System dependencies
+### Prerequisites
 
-* Configuration
+Ensure that you have installed
+```
+Ruby  
+Rails
+``` 
+### Technologies Used
 
-* Database creation
+```
+Ruby
+Rails
+RSpec
+Capybara
+devise
+```
 
-* Database initialization
+### Setting up the application
+Clone the application:
+```
+git clone https://github.com/ogomb/ride_sharing_app.git
+```
 
-* How to run the test suite
+Change directory to ride_sharing_app
+```
+cd ride_sharing_app
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+Install gems by running 
+```
+bundle install
+```
+Run Migrations
+```
+bundle exec rake db:migrate
+```
+Seed the the database
+```
+bundle exec rake db:seed
+```
+Start the application by running:
 
-* Deployment instructions
+```
+rails s
+```
 
-* ...
+## Running the tests
+
+You can run the test by running
+```
+bundle exec rspec spec
+```
+
+## Deployment
+
+
