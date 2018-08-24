@@ -13,13 +13,22 @@ class RidesController < ApplicationController
 
   def create
     @ride = Ride.new(ride_params)
+    @user = current_user
 
     if @ride.save
-      flash[:notice] = "Ride has been created.";
+      flash[:notice] = 'Ride has been created.'
+      User.transaction do
+        @user.roles.build(ride_id: @ride.id, role: 'driver')
+
+        if !@user.save
+          flash.now[:alert] = 'User has not been updated.'
+          raise ActiveRecord::Rollback
+        end
+      end
       redirect_to @ride
     else
-      flash.now[:alert] = "Ride has not been created"
-      render "new"
+      flash.now[:alert] = 'Ride has not been created'
+      render 'new'
     end
   end
 
@@ -36,11 +45,11 @@ class RidesController < ApplicationController
     authorize @ride, :update?
 
     if @ride.update(ride_params)
-      flash[:notice] = "Ride has been updated."
+      flash[:notice] = 'Ride has been updated.'
       redirect_to @ride
     else
-      flash.now[:alert] = "Ride has not been updated."
-      render "edit"
+      flash.now[:alert] = 'Ride has not been updated.'
+      render 'edit'
     end
   end
 

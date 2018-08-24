@@ -1,3 +1,4 @@
+<% user_logged_in do %>
 <header>
 <h1>Rides</h1>
     <ul class="actions">
@@ -7,7 +8,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-sm">
+    <div class="col-sm-6">
       <div id="rides">
         <% @rides.each do |ride| %>
           <h2><%= link_to ride.destination, ride %></h2>
@@ -18,25 +19,27 @@
 
     <div class="col-sm-offset-6" >
       <header>
-        <p>Available Rides</p>
+        <h2 style="color: #B00100">Available Rides</h2>
       </header>
 
+
       <%= simple_form_for(:user) do |f| %>
-      <table class="roles">
-        <% @all_rides.each do |ride| %>
-            <tr>
-              <th><%= label_tag dom_id(ride), 'Ride to ' + ride.destination + ' leaving at ' + ride.checkout + ' want to be?' %></th>
-              <td>
-                <%= select_tag dom_id(ride), options_for_select(roles,
-                    @user.role_on(ride)), name: "roles[#{ride.id}]",
-                               include_blank: true %>
-              </td>
-            </tr>
-        <% end %>
-      </table>
+          <table class="roles">
+            <% @all_rides.each do |ride| %>
+                <tr>
+                  <th><%= label_tag dom_id(ride), 'Ride to ' + ride.destination + ' leaving at ' + ride.checkout + ' want to be?' %></th>
+                  <td>
+                    <%= select_tag dom_id(ride), options_for_select(roles,
+                                                                    @user.role_on(ride)), name: "roles[#{ride.id}]",
+                                   include_blank: true %>
+                  </td>
+                </tr>
+            <% end %>
+          </table>
 
           <%= f.button :submit, 'Add Ride',class: "btn btn-primary" %>
       <% end %>
     </div>
   </div>
 </div>
+<% end %>

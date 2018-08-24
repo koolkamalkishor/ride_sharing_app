@@ -14,11 +14,11 @@ class Admin::UsersController < Admin::ApplicationController
     @user = User.new(user_params)
     build_roles_for(@user)
     if @user.save
-      flash[:notice] = "User has been created."
+      flash[:notice] = 'User has been created.'
       redirect_to admin_users_path
     else
-      flash.now[:alert] = "User has not been created."
-      render "new"
+      flash.now[:alert] = 'User has not been created.'
+      render 'new'
     end
   end
 
@@ -37,11 +37,11 @@ class Admin::UsersController < Admin::ApplicationController
       @user.roles.clear
       build_roles_for(@user)
       if @user.update(user_params)
-        flash[:notice] = "User has been updated."
+        flash[:notice] = 'User has been updated.'
         redirect_to admin_users_path
       else
-        flash.now[:alert] = "User has not been updated."
-        render "edit"
+        flash.now[:alert] = 'User has not been updated.'
+        render 'edit'
         raise ActiveRecord::Rollback
       end
     end
@@ -49,10 +49,10 @@ class Admin::UsersController < Admin::ApplicationController
 
   def archive
     if @user == current_user
-      flash[:alert] = "You cannot archive yourself!"
+      flash[:alert] = 'You cannot archive yourself!'
     else
       @user.archive
-      flash[:notice] = "User has been archived."
+      flash[:notice] = 'User has been archived.'
     end
     redirect_to admin_users_path
   end
