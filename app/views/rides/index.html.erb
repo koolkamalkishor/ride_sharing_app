@@ -27,7 +27,7 @@
           <table class="roles">
             <% @all_rides.each do |ride| %>
                 <tr>
-                  <th><%= label_tag dom_id(ride), 'Ride to ' + ride.destination + ' leaving at ' + ride.checkout + ' want to be?' %></th>
+                  <th><%= label_tag dom_id(ride), 'Ride to ' + ride.destination + ' leaving at ' + ride.checkout + ' opt in?' %></th>
                   <td>
                     <%= select_tag dom_id(ride), options_for_select(roles,
                                                                     @user.role_on(ride)), name: "roles[#{ride.id}]",

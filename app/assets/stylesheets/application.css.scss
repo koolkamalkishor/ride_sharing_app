@@ -77,3 +77,21 @@ form {
 body {
   padding-top: 70px;
 }
+
+body, html {
+  font-family : 'Josefin Slab';
+  background-image: url(world.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  min-width: 1000px;
+  font-size : 21px;
+}
+
+.awesome {
+  border: 3px solid;
+  color: #41a3f4;
+  padding: 25px;
+  margin-top: 60px;
+  background-color: #c8c8c8;
+}
