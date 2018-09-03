@@ -1,6 +1,6 @@
 <%= simple_form_for([:admin, ride]) do |f| %>
-      <%= f.input :passengers %>
-      <%= f.input :checkout %>
+      <%= f.input :passengers, label: 'Number of Passengers'%>
+      <%= f.input :checkout, label: 'Departure Time', placeholder: '08:00'%>
       <%= f.input :destination %>
 
     <%= f.button :submit, class: "btn-primary" %>

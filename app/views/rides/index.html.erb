@@ -9,6 +9,9 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-6">
+      <header>
+        <h2 style="color: #B00100">My Rides</h2>
+      </header>
       <div id="rides">
         <% @rides.each do |ride| %>
           <h2><%= link_to ride.destination, ride %></h2>
