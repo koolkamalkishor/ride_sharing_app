@@ -5,7 +5,7 @@ RSpec.describe InterestPolicy do
     subject {  InterestPolicy.new(user, interest) }
 
     let(:user) { FactoryGirl.create(:user) }
-    let(:ride) { FactoryGirl.create(:ride, destination: "Nairobi", departure_time: "18:00", passengers: 4) }
+    let(:ride) { FactoryGirl.create(:ride, destination: "Nairobi", departure_time: Time.now, passengers: 4) }
     let(:interest) { FactoryGirl.create(:interest, ride: ride,author: user) }
 
     context "for viewers of the ride" do
@@ -34,7 +34,7 @@ RSpec.describe InterestPolicy do
 
   context "for drivers of other rides" do
     before do
-      assign_role!(user, :driver, FactoryGirl.create(:ride, destination: "Kisumu", checkout: "18:00", passengers: 4))
+      assign_role!(user, :driver, FactoryGirl.create(:ride, destination: "Kisumu", departure_time: Time.now, passengers: 4))
     end
     it { should_not permit_action :show }
     it { should_not permit_action :create }
