@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.feature "Users can only see the appropriate links" do
-  let(:ride) { FactoryGirl.create(:ride, destination: "Nairobi", checkout: "18:00", passengers: 4)}
+  let(:ride) { FactoryGirl.create(:ride, destination: "Nairobi", departure_time: Time.now, passengers: 4)}
   let(:user) { FactoryGirl.create(:user) }
   let(:admin) { FactoryGirl.create(:user, :admin) }
   let(:interest) { FactoryGirl.create(:interest, ride: ride, author: user) }

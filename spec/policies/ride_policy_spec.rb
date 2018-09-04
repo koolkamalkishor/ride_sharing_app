@@ -9,7 +9,7 @@ describe RidePolicy do
   context "policy_scope" do
     subject { Pundit.policy_scope(user, Ride) }
 
-    let!(:ride) { FactoryGirl.create(:ride, destination: "Nairobi", checkout: "18:00", passengers: 4) }
+    let!(:ride) { FactoryGirl.create(:ride, destination: "Nairobi", departure_time: Time.now, passengers: 4) }
     let(:user) { FactoryGirl.create :user }
 
     it "is empty for anonymous users" do
@@ -35,7 +35,7 @@ describe RidePolicy do
     subject { RidePolicy.new(user, ride) }
 
     let(:user) { FactoryGirl.create(:user) }
-    let(:ride) { FactoryGirl.create(:ride, destination: "Nairobi", checkout: "18:00", passengers: 4) }
+    let(:ride) { FactoryGirl.create(:ride, destination: "Nairobi", departure_time: Time.now, passengers: 4) }
 
     context "for anonymous users" do
       let(:user) { nil }
@@ -59,11 +59,12 @@ describe RidePolicy do
       before { assign_role!(user, :driver, ride) }
       it { should permit_action :show }
       it { should permit_action :update }
+      it { should permit_action :destroy }
     end
 
     context "for drivers of other rides" do
       before do
-        assign_role!(user, :driver, FactoryGirl.create(:ride, destination: "Kisumu", checkout: "18:00", passengers: 4))
+        assign_role!(user, :driver, FactoryGirl.create(:ride, destination: "Kisumu", departure_time: Time.now, passengers: 4))
       end
       it { should_not permit_action :show }
       it { should_not permit_action :update }

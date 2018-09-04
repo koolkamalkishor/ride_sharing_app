@@ -8,6 +8,6 @@ end
 
 ["Nairobi", "Kisumu"].each do |destination|
   unless Ride.exists?(destination: destination)
-             Ride.create!(destination: destination, passengers: 4, checkout: "13:00")
+             Ride.create!(destination: destination, passengers: 4, departure_time: Time.now)
   end
 end

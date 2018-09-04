@@ -1,6 +1,6 @@
 <%= simple_form_for(ride) do |f| %>
       <%= f.input :passengers, label: 'Number of Passengers' %>
-      <%= f.input :checkout, label: 'Departure Time', placeholder: '08:00'%>
+      <%= f.input :departure_time, :as => :datetime_picker, :label => 'Departure Time'%>
       <%= f.input :destination %>
 
     <%= f.button :submit, class: "btn-primary" %>

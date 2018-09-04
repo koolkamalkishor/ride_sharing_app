@@ -33,6 +33,7 @@ gem "pundit", "~> 0.3.0"
 
 gem 'simplecov'
 
+
 gem 'coveralls', require: false
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
@@ -48,10 +49,18 @@ gem 'coveralls', require: false
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+gem 'momentjs-rails'
+
+gem 'jquery-rails'
+
+gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
+
+gem 'pg'
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem "rspec-rails"
+
+  gem 'pry-byebug'
+  gem 'pry-rails'
 end
 
 group :development do

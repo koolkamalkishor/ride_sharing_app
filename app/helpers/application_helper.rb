@@ -11,7 +11,6 @@ module ApplicationHelper
   def roles
     {
         'Passanger' => 'editor',
-
     }
   end
 end

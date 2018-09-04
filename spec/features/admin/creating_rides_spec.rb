@@ -9,7 +9,7 @@ RSpec.feature "Users can create new rides" do
   end
   scenario "with valid attributes" do
     fill_in "Destination", with: "Nairobi"
-    fill_in "Checkout", with: "18:00"
+    fill_in "Departure Time", with: Time.now
     fill_in "Passengers", with: 4
     click_button "Create Ride"
 

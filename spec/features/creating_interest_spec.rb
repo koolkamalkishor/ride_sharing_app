@@ -4,7 +4,7 @@ RSpec.feature " users can respond to ride offers" do
   let(:user) { FactoryGirl.create(:user)}
   before do
     login_as(user)
-    ride = FactoryGirl.create(:ride, destination: "Nairobi", checkout: "18:00", passengers: 4)
+    ride = FactoryGirl.create(:ride, destination: "Nairobi", departure_time: Time.now, passengers: 4)
     assign_role!(user, :editor, ride)
 
     visit ride_path(ride)

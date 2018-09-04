@@ -1,9 +1,9 @@
 class RidesController < ApplicationController
 
-  before_action :set_ride, only: [:show, :edit, :update,]
+  before_action :set_ride, only: [:show, :edit, :update, :delete]
   before_action :set_rides, only: [:index]
   def index
-    @rides = policy_scope(Ride)
+    @my_rides = policy_scope(Ride.available_rides)
     @user = current_user
   end
 
@@ -55,13 +55,11 @@ class RidesController < ApplicationController
   def add_ride
     @user = current_user
     User.transaction do
-      @user.roles.clear
-      role_data = params.fetch(:roles, [])
-      role_data.each do |ride_id, role_name|
-        if role_name.present?
+      role_data = params.fetch(:ride_id, [])
+      role_data.each do |ride_id, role_name='editor'|
           @user.roles.build(ride_id: ride_id, role: role_name)
-        end
       end
+
       if !@user.save
         flash.now[:alert] = "User has not been updated."
         raise ActiveRecord::Rollback
@@ -70,14 +68,23 @@ class RidesController < ApplicationController
     end
   end
 
+  def destroy
+    authorize @ride, :destroy
+    @ride = Ride.find(params[:id])
+    @ride.destroy
+
+    flash[:notice] = "Ride has been deleted."
+    redirect_to rides_path
+  end
+
   private
 
   def set_rides
-    @all_rides = Ride.order(:destination)
+    @all_rides = Ride.available_rides
   end
 
   def ride_params
-    params.require(:ride).permit(:destination, :checkout, :passengers)
+    params.require(:ride).permit(:destination, :departure_time, :passengers)
   end
 
   def set_ride

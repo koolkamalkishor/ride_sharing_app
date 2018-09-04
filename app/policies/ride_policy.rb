@@ -15,4 +15,8 @@ class RidePolicy < ApplicationPolicy
   def update?
     user.try(:admin?) || record.has_driver?(user)
   end
+
+  def destroy?
+    user.try(:admin?) || record.has_driver?(user)
+  end
 end

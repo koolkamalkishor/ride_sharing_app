@@ -3,8 +3,13 @@ class Ride < ApplicationRecord
   has_many :roles, dependent: :delete_all
 
   validates :destination, presence: true
-  validates :checkout, presence: true
-  validates :passengers, presence: true
+  validates :departure_time, presence: true
+  validates :passengers,
+            presence: true,
+            numericality: {
+                only_integer: true,
+                greater_than: 0
+            }
 
 
   def has_member?(user)
@@ -16,4 +21,6 @@ class Ride < ApplicationRecord
       roles.exists?(user_id: user, role: role)
     end
   end
+
+  scope :available_rides, (-> { where('departure_time >= ?', Time.current) })
 end

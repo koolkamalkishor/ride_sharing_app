@@ -10,30 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_23_083639) do
+ActiveRecord::Schema.define(version: 2018_09_03_124601) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "interests", force: :cascade do |t|
     t.string "name"
-    t.integer "ride_id"
+    t.bigint "ride_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "author_id"
+    t.bigint "author_id"
     t.index ["author_id"], name: "index_interests_on_author_id"
     t.index ["ride_id"], name: "index_interests_on_ride_id"
   end
 
   create_table "rides", force: :cascade do |t|
-    t.string "checkout"
     t.integer "passengers"
     t.string "destination"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "departure_time"
   end
 
   create_table "roles", force: :cascade do |t|
-    t.integer "user_id"
+    t.bigint "user_id"
     t.string "role"
-    t.integer "ride_id"
+    t.bigint "ride_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ride_id"], name: "index_roles_on_ride_id"
@@ -54,4 +57,8 @@ ActiveRecord::Schema.define(version: 2018_08_23_083639) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "interests", "rides"
+  add_foreign_key "interests", "users", column: "author_id"
+  add_foreign_key "roles", "rides"
+  add_foreign_key "roles", "users"
 end

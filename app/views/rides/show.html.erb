@@ -6,7 +6,7 @@
       <li><%= link_to "Edit Ride",
                       edit_ride_path(@ride), class: "edit" %></li>
     <% end %>
-    <% admins_only do %>
+    <% if policy(@ride).destroy? %>
       <li> <%= link_to "Delete Ride",
                        admin_ride_path(@ride),
                        method: :delete,
@@ -20,7 +20,7 @@
 
 
 <h1> A ride for <%= @ride.passengers %> People</h1>
-<p> Leaving at <%= @ride.checkout %> to <%= @ride.destination %></p>
+<p> Leaving at <%= @ride.departure_time.strftime("%I:%M%p") %> to <%= @ride.destination %></p>
 
 <header>
   <h2>Interest</h2>
