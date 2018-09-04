@@ -13,5 +13,9 @@ test:
   database: share_my_ride
 
 production:
-  <<: *default
-  database: share_my_ride
+    adapter: 'postgresql'
+    encoding: 'unicode'
+    host: <%= ENV['DATABASE_HOST'] %>
+    database: <%= ENV['DATABASE_NAME'] %>
+    username: <%= ENV['DATABASE_USER'] %>
+    password: <%= ENV['DATABASE_PASSWORD'] %>
