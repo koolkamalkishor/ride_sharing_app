@@ -30,14 +30,14 @@
           <table class="roles">
             <% @all_rides.each do |ride| %>
                 <tr>
-                  <th><%= label_tag dom_id(ride), 'Ride to ' + ride.destination + ' leaving at ' + ride.departure_time.strftime("%I:%M%p") + ' opt in?' %></th>
+                  <th><%= label_tag dom_id(ride), 'Ride to ' + ride.destination + ' leaving at ' + ride.departure_time.strftime("%I:%M%p") + ', Join?' %></th>
                   <td><%= check_box_tag 'ride_id[]', ride.id  %>
                   </td>
                 </tr>
             <% end %>
           </table>
 
-          <%= f.button :submit, 'Add Ride',class: "btn btn-primary" %>
+          <%= f.button :submit, 'Choose Ride',class: "btn btn-primary" %>
       <% end %>
     </div>
   </div>
