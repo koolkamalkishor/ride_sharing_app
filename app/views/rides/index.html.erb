@@ -15,7 +15,7 @@
       <div id="rides">
         <% @my_rides.each do |ride| %>
           <h2><%= link_to ride.destination, ride %></h2>
-            <p> Requiring <%= ride.passengers %> and leaving at <%= ride.departure_time.strftime("%I:%M%p") %></p>
+            <p> Requiring <%= ride.passengers %> and leaving on <%= ride.departure_time.strftime(" %A %b ") %>at <%= ride.departure_time.strftime(" %I:%M%p") %></p>
         <% end %>
       </div>
     </div>

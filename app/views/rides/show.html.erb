@@ -20,13 +20,14 @@
 
 
 <h1> A ride for <%= @ride.passengers %> People</h1>
-<p> Leaving at <%= @ride.departure_time.strftime("%I:%M%p") %> to <%= @ride.destination %></p>
+<p> Leaving at <%= @ride.departure_time.strftime("%I:%M%p") %> to <%= @ride.destination %> on
+  <%= @ride.departure_time.strftime(" %A %B ") %></p>
 
 <header>
   <h2>Interest</h2>
   <ul class="actions">
     <% if policy(Interest.new(ride: @ride)).create? %>
-      <li><%= link_to "New Interest", new_ride_interest_path(@ride),
+      <li><%= link_to "Interested ?", new_ride_interest_path(@ride),
                       class: "new" %></li>
     <% end %>
   </ul>

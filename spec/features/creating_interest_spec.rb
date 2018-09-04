@@ -8,7 +8,7 @@ RSpec.feature " users can respond to ride offers" do
     assign_role!(user, :editor, ride)
 
     visit ride_path(ride)
-    click_link "New Interest"
+    click_link "Interested ?"
   end
 
   scenario "with valid attributes" do
