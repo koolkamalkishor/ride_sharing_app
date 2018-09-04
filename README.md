@@ -8,6 +8,8 @@ This application gives the creator of the ride to select people who he wants to 
 
 A user can create a new ride as well as jumping in to other rides that are available. The user would not be able to edit the ride if he is not the creator of the ride. He will not be able to edit other peoples interest on the ride.
 
+The creator of the ride has the autonomy of selecting the people he/she wants on the ride.
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
