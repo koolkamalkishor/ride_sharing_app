@@ -5,7 +5,7 @@ env:
   - DB=postgresql
 before_script:
   - psql -c 'create database share_my_ride' -U postgres
-  - rails db:migrate
+  - bundle exec rake db:migrate
 script:
   - bundle exec rake db:test:prepare
   - bundle exec rspec
