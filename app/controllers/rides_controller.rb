@@ -3,12 +3,15 @@ class RidesController < ApplicationController
   before_action :set_ride, only: [:show, :edit, :update, :delete]
   before_action :set_rides, only: [:index]
   def index
-    @my_rides = policy_scope(Ride.available_rides)
+    @my_rides = policy_scope(Ride.available_rides.distinct)
     @user = current_user
   end
 
   def new
     @ride = Ride.new
+  end
+  def home
+    render 'home'
   end
 
   def create
