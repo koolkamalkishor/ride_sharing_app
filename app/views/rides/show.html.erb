@@ -36,8 +36,7 @@
 <ul id="interests">
   <% @ride.interests.each do |interest| %>
       <li>
-        #<%= interest.id %> -
-        <%= link_to interest.name, [@ride, interest] %>
+        <%= link_to interest.author.email, [@ride, interest] %>
       </li>
   <% end %>
 </ul>

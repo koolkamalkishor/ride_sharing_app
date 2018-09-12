@@ -12,9 +12,9 @@ class RidesController < ApplicationController
   end
 
   def create
-    @ride = Ride.new(ride_params)
     @user = current_user
-
+    @ride = Ride.new(ride_params)
+    @ride.author_id = @user.id
     if @ride.save
       flash[:notice] = 'Ride has been created.'
       User.transaction do

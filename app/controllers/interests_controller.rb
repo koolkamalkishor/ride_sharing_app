@@ -12,12 +12,17 @@ class InterestsController < ApplicationController
     @interest.author = current_user
     authorize @interest, :create?
 
+    if @ride.author_id ==current_user.id
+      flash[:notice] = "You can not show interest on your own ride."
+      redirect_to @ride and return
+    end
+
     if @interest.save
-      flash[:notice] = "Interest has been created."
-      redirect_to [@ride, @interest]
+        flash[:notice] = "Interest has been created."
+        redirect_to [@ride, @interest]
     else
-      flash.now[:alert] = "Interest has not been created."
-      render "new"
+        flash.now[:alert] = "Interest has not been created."
+        render "new"
     end
   end
 
@@ -26,6 +31,10 @@ class InterestsController < ApplicationController
   end
 
   def edit
+    if @ride.author_id == current_user.id
+      flash[:notice] = "You can not edit this interest."
+      redirect_to @ride and return
+    end
     authorize @interest, :update?
   end
 
@@ -42,6 +51,10 @@ class InterestsController < ApplicationController
   end
 
   def destroy
+    if @ride.author_id ==current_user.id
+      flash[:notice] = "You can not Delete this interest."
+      redirect_to @ride and return
+    end
     authorize @interest, :destroy?
 
     @interest.destroy
