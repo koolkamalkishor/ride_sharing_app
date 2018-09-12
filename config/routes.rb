@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
   devise_for :users
 
-  root "rides#home"
+  root "rides#index"
 
   resources :rides do
     resources :interests
