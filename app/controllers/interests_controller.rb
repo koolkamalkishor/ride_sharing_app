@@ -12,8 +12,14 @@ class InterestsController < ApplicationController
     @interest.author = current_user
     authorize @interest, :create?
 
-    if @ride.author_id ==current_user.id
+    if @ride.author_id == current_user.id
       flash[:notice] = "You can not show interest on your own ride."
+      redirect_to @ride and return
+    end
+
+    @ride.interests.each do |interest|
+      @ride.author_id == interest.author_id
+      flash[:notice] = "You can not show interest twice on a ride."
       redirect_to @ride and return
     end
 
@@ -51,7 +57,7 @@ class InterestsController < ApplicationController
   end
 
   def destroy
-    if @ride.author_id ==current_user.id
+    if @ride.author_id == current_user.id
       flash[:notice] = "You can not Delete this interest."
       redirect_to @ride and return
     end
