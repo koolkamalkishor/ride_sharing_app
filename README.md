@@ -68,5 +68,4 @@ bundle exec rspec spec
 ```
 
 ## Deployment
-[Link](https://share-my-ride.herokuapp.com/)
 
